@@ -70,13 +70,12 @@ let messageArea = document.querySelector(".message");
 let trophy = document.querySelector(".trophy");
 
 // Games setting
-console.log(wordToGuess);
 numbeOfWords = words.length;
 wordsGuessd = 0;
 numberOfTries = 7;
 numbeOfLetters = wordToGuess.length;
 currentTry = 1;
-numberOfHints = 3;
+numberOfHints = 2;
 
 function genrateInput() {
   // Genrate the tries and the inputs of letters
@@ -139,11 +138,6 @@ function genrateInput() {
         nextInput.focus();
       }
 
-      if (event.key == "Backspace") {
-        setTimeout(() => {
-          if (backInput) backInput.focus();
-        }, 0);
-      }
       input.selectionStart = input.selectionEnd = this.value.length;
     });
   });
@@ -217,11 +211,13 @@ function handleGuesses() {
       numbeOfLetters = wordToGuess.length;
       currentTry = 1;
       numberOfHints = 3;
+      hintButton.disabled = false;
 
       const triesDiv = document.querySelectorAll(".inputs > div");
       triesDiv.forEach((e) => {
         e.remove();
       });
+
       genrateInput();
     }, 2000);
 
